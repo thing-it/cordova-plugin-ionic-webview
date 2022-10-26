@@ -222,6 +222,7 @@
     self.CDV_LOCAL_SERVER = [NSString stringWithFormat:@"%@://%@", scheme, bind];
 
     self.uiDelegate = [[CDVWKWebViewUIDelegate alloc] initWithTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]];
+    self.uiDelegate.mediaPermissionGrantType = [self parsePermissionGrantType:[settings cordovaSettingForKey:@"MediaPermissionGrantType"]];
 
     CDVWKWeakScriptMessageHandler *weakScriptMessageHandler = [[CDVWKWeakScriptMessageHandler alloc] initWithScriptMessageHandler:self];
 
@@ -530,6 +531,30 @@
 {
     return self.engineWebView;
 }
+
+- (CDVWebViewPermissionGrantType)parsePermissionGrantType:(NSString*)optionString
+{
+    CDVWebViewPermissionGrantType result = CDVWebViewPermissionGrantType_Prompt;
+
+    if (optionString != nil){
+        if ([optionString isEqualToString:@"prompt"]) {
+            result = CDVWebViewPermissionGrantType_Prompt;
+        } else if ([optionString isEqualToString:@"deny"]) {
+            result = CDVWebViewPermissionGrantType_Deny;
+        } else if ([optionString isEqualToString:@"grant"]) {
+            result = CDVWebViewPermissionGrantType_Grant;
+        } else if ([optionString isEqualToString:@"grantIfSameHostElsePrompt"]) {
+            result = CDVWebViewPermissionGrantType_GrantIfSameHost_ElsePrompt;
+        } else if ([optionString isEqualToString:@"grantIfSameHostElseDeny"]) {
+            result = CDVWebViewPermissionGrantType_GrantIfSameHost_ElseDeny;
+        } else {
+            NSLog(@"Invalid \"MediaPermissionGrantType\" was detected. Fallback to default value of \"prompt\"");
+        }
+    }
+
+    return result;
+}
+
 
 - (WKUserScript *)wkPluginScript
 {
