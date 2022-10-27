@@ -221,8 +221,9 @@
     }
     self.CDV_LOCAL_SERVER = [NSString stringWithFormat:@"%@://%@", scheme, bind];
 
-    self.uiDelegate = [[CDVWKWebViewUIDelegate alloc] initWithTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]];
-    self.uiDelegate.mediaPermissionGrantType = [self parsePermissionGrantType:[settings cordovaSettingForKey:@"MediaPermissionGrantType"]];
+    CDVWebViewUIDelegate* uiDelegate = [[CDVWebViewUIDelegate alloc] initWithTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]];
+    uiDelegate.mediaPermissionGrantType = [self parsePermissionGrantType:[settings cordovaSettingForKey:@"MediaPermissionGrantType"]];
+    self.uiDelegate = uiDelegate;
 
     CDVWKWeakScriptMessageHandler *weakScriptMessageHandler = [[CDVWKWeakScriptMessageHandler alloc] initWithScriptMessageHandler:self];
 
@@ -320,7 +321,7 @@
         name:UIKeyboardWillHideNotification object:nil];
     }
 
-    NSLog(@"Using Ionic WKWebView");
+    NSLog(@"Using Ionic WKWebView edit");
 
 }
 
@@ -535,6 +536,7 @@
 - (CDVWebViewPermissionGrantType)parsePermissionGrantType:(NSString*)optionString
 {
     CDVWebViewPermissionGrantType result = CDVWebViewPermissionGrantType_Prompt;
+     NSLog(@"Grant Type selection");
 
     if (optionString != nil){
         if ([optionString isEqualToString:@"prompt"]) {
