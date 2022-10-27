@@ -21,8 +21,17 @@
 
 @interface CDVWKWebViewUIDelegate : NSObject <WKUIDelegate>
 
-@property (nonatomic, copy) NSString* title;
+typedef NS_ENUM(NSInteger, CDVWebViewPermissionGrantType) {
+    CDVWebViewPermissionGrantType_Prompt,
+    CDVWebViewPermissionGrantType_Deny,
+    CDVWebViewPermissionGrantType_Grant,
+    CDVWebViewPermissionGrantType_GrantIfSameHost_ElsePrompt,
+    CDVWebViewPermissionGrantType_GrantIfSameHost_ElseDeny
+};
 
-- (instancetype)initWithTitle:(NSString*)title;
+@property(nonatomic, copy) NSString *title;
+@property(nonatomic, assign) CDVWebViewPermissionGrantType mediaPermissionGrantType;
+
+- (instancetype)initWithTitle:(NSString *)title;
 
 @end
