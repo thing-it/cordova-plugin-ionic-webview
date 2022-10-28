@@ -17,12 +17,6 @@
 #         under the License.
 -->
 
-<!-- TODO: remove beta in README.md and CONTRIBUTING.md -->
-
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&identifier=104773211)](https://dependabot.com)
-[![npm](https://img.shields.io/npm/v/cordova-plugin-ionic-webview.svg)](https://www.npmjs.com/package/cordova-plugin-ionic-webview)
-
 # Ionic Web View for Cordova
 
 A Web View plugin for Cordova, focused on providing the highest performance experience for Ionic apps (but can be used with any Cordova app).
@@ -38,6 +32,9 @@ Note: This repo and its documentation are for `cordova-plugin-ionic-webview` @ `
 :mega: **Support/Questions?** Please see our [Support Page][ionic-support] for general support questions. The issues on GitHub should be reserved for bug reports and feature requests.
 
 :sparkling_heart: **Want to contribute?** Please see [CONTRIBUTING.md](https://github.com/ionic-team/cordova-plugin-ionic-webview/blob/master/CONTRIBUTING.md).
+
+## About this fork
+This fork implements the [requestMediaCapturePermission](https://developer.apple.com/documentation/webkit/wkuidelegate/3763087-webview) instance method for WebKit. Per default WebKit will prompt the user for a camera & microphone permission every session. The plugin.xml is read out on WebView initialization and parsed to give an appropriate response to WebKit. The camera / microphone permission is independent of the native permissions that need to be granted to the app.
 
 ## Configuration
 
@@ -101,6 +98,14 @@ Other possible values are `1` (`MIXED_CONTENT_NEVER_ALLOW`) and `2` (`MIXED_CONT
 ### iOS Preferences
 
 Preferences only available for iOS platform
+
+#### MediaPermissionGrantType
+
+Default value is 'grant'. 
+
+Configures how WebKits requestMediaCapturePermission should be handled.
+Possible values: 'prompt', 'deny', 'grant', 'grantIfSameHostElsePrompt', 'grantIfSameHostElseDeny'
+
 
 #### iosScheme
 
