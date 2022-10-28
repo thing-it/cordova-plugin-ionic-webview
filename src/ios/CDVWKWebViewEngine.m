@@ -321,7 +321,7 @@
         name:UIKeyboardWillHideNotification object:nil];
     }
 
-    NSLog(@"Using Ionic WKWebView edit");
+    NSLog(@"Using Ionic WKWebView");
 
 }
 
@@ -536,7 +536,6 @@
 - (CDVWebViewPermissionGrantType)parsePermissionGrantType:(NSString*)optionString
 {
     CDVWebViewPermissionGrantType result = CDVWebViewPermissionGrantType_Prompt;
-     NSLog(@"Grant Type selection");
 
     if (optionString != nil){
         if ([optionString isEqualToString:@"prompt"]) {
