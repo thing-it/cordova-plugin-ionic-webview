@@ -63,6 +63,7 @@
     <config-file target="config.xml" parent="/*">
         <allow-navigation href="ionic://*"/>
         <preference name="deployment-target" value="11.0"/>
+        <preference name="MediaPermissionGrantType" value="grant" />
         <feature name="IonicWebView">
             <param name="ios-package" value="CDVWKWebViewEngine"/>
         </feature>
